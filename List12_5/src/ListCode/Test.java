@@ -3,10 +3,22 @@ package ListCode;
 public class Test {
     public static void main(String[] args) {
         SingleLinkedList s1 = new SingleLinkedList();
-        s1.add(1);
-        s1.add(2);
-        s1.add(3);
+        s1.addLast(1);
+        s1.addLast(2);
+        s1.addLast(2);
+        s1.addLast(4);
+        s1.addLast(5);
+        s1.remove(2);
+
         s1.print();
+
+//        Node newNode = s1.reverse(s1.getFirst());
+//        while(newNode != null) {
+//            System.out.print(newNode.getData()+"、");
+//            newNode = newNode.getNext();
+//        }
+//        System.out.println();
+
 
 
 
