@@ -1,0 +1,8 @@
+http://localhost:8080/zxjx
+
+管理员 admin  密码 111
+
+教师  js   密码  111
+
+
+学生   111   密码 111

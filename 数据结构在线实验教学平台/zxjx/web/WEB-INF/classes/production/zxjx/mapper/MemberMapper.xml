@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Member" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="sfz" property="sfz" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="VARCHAR" />
+    <result column="ifuse" property="ifuse" jdbcType="VARCHAR" />
+    <result column="hy" property="hy" jdbcType="VARCHAR" />
+    <result column="tx" property="tx" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, password, realname, sex, sfz, tel, email, regtime, ifuse, hy, tx
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.MemberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.pojo.Member" >
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="sfz != null" >
+        sfz,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="regtime != null" >
+        regtime,
+      </if>
+      <if test="ifuse != null" >
+        ifuse,
+      </if>
+      <if test="hy != null" >
+        hy,
+      </if>
+      <if test="tx != null" >
+        tx,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="sfz != null" >
+        #{sfz,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="ifuse != null" >
+        #{ifuse,jdbcType=VARCHAR},
+      </if>
+      <if test="hy != null" >
+        #{hy,jdbcType=VARCHAR},
+      </if>
+      <if test="tx != null" >
+        #{tx,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.MemberExample" resultType="java.lang.Integer" >
+    select count(*) from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfz != null" >
+        sfz = #{record.sfz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regtime != null" >
+        regtime = #{record.regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifuse != null" >
+        ifuse = #{record.ifuse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hy != null" >
+        hy = #{record.hy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tx != null" >
+        tx = #{record.tx,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      sfz = #{record.sfz,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      regtime = #{record.regtime,jdbcType=VARCHAR},
+      ifuse = #{record.ifuse,jdbcType=VARCHAR},
+      hy = #{record.hy,jdbcType=VARCHAR},
+      tx = #{record.tx,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Member" >
+    update member
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="sfz != null" >
+        sfz = #{sfz,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null" >
+        regtime = #{regtime,jdbcType=VARCHAR},
+      </if>
+      <if test="ifuse != null" >
+        ifuse = #{ifuse,jdbcType=VARCHAR},
+      </if>
+      <if test="hy != null" >
+        hy = #{hy,jdbcType=VARCHAR},
+      </if>
+      <if test="tx != null" >
+        tx = #{tx,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteByExample" parameterType="com.pojo.MemberExample" >
+    delete from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="getSame" resultType="java.lang.String" parameterType="java.lang.String" >
+      SELECT id
+      FROM member
+      WHERE username = #{username}
+  </select>
+  <insert id="insert" parameterType="com.pojo.Member" >
+    insert into member (username, password,
+      realname, sex, sfz,
+      tel, email, regtime)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{realname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{sfz,jdbcType=VARCHAR},
+      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{regtime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Member" >
+    update member
+    set
+      realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      sfz = #{sfz,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateIfuse" parameterType="com.pojo.Member" >
+    update member
+    set
+      ifuse = #{ifuse,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateHy" parameterType="com.pojo.Member" >
+    update member
+    set
+      hy = #{hy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="toLogin" parameterType="Member" resultType="Member">
+    SELECT
+        *
+    FROM
+        member
+    WHERE
+        username=#{username}
+    AND
+        password = #{password}
+    AND
+        ifuse = #{ifuse}
+  </select>
+  <select id="toLost" parameterType="Member" resultType="Member">
+    SELECT
+        *
+    FROM
+        member
+    WHERE
+        username=#{username}
+    AND
+        email = #{email}
+    AND
+        ifuse = #{ifuse}
+  </select>
+
+
+  <update id="upMember" parameterType="Member">
+    update member
+    set
+      realname = #{realname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      sfz = #{sfz,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where username = #{username}
+  </update>
+
+  <select id="memberPwd" resultType="Member" parameterType="Member">
+    SELECT
+        *
+    FROM
+        member
+    WHERE
+        username = #{username}
+    AND
+        password = #{password}
+  </select>
+  <update id="memberupPwd" parameterType="Member">
+    update member
+    set
+      password = #{password}
+    where username = #{username}
+  </update>
+
+  <select id="selectName" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT
+        realname
+    FROM
+        member
+    WHERE
+        username = #{username}
+  </select>
+</mapper>

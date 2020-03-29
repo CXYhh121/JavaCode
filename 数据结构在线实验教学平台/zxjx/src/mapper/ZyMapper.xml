@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ZyMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Zy" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bt" property="bt" jdbcType="VARCHAR" />
+    <result column="fl" property="fl" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="sj" property="sj" jdbcType="VARCHAR" />
+    <result column="js" property="js" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pojo.Zy" extends="BaseResultMap" >
+    <result column="nr" property="nr" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, bt, fl, url, sj, js
+  </sql>
+  <sql id="Blob_Column_List" >
+    nr
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pojo.ZyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.ZyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zy
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zy
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.ZyExample" >
+    delete from zy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Zy" >
+    insert into zy (id, bt, fl, url, 
+      sj, js, nr)
+    values (#{id,jdbcType=INTEGER}, #{bt,jdbcType=VARCHAR}, #{fl,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{sj,jdbcType=VARCHAR}, #{js,jdbcType=VARCHAR}, #{nr,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Zy" >
+    insert into zy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bt != null" >
+        bt,
+      </if>
+      <if test="fl != null" >
+        fl,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="sj != null" >
+        sj,
+      </if>
+      <if test="js != null" >
+        js,
+      </if>
+      <if test="nr != null" >
+        nr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bt != null" >
+        #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="js != null" >
+        #{js,jdbcType=VARCHAR},
+      </if>
+      <if test="nr != null" >
+        #{nr,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.ZyExample" resultType="java.lang.Integer" >
+    select count(*) from zy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update zy
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bt != null" >
+        bt = #{record.bt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fl != null" >
+        fl = #{record.fl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sj != null" >
+        sj = #{record.sj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.js != null" >
+        js = #{record.js,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nr != null" >
+        nr = #{record.nr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update zy
+    set id = #{record.id,jdbcType=INTEGER},
+      bt = #{record.bt,jdbcType=VARCHAR},
+      fl = #{record.fl,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      sj = #{record.sj,jdbcType=VARCHAR},
+      js = #{record.js,jdbcType=VARCHAR},
+      nr = #{record.nr,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update zy
+    set id = #{record.id,jdbcType=INTEGER},
+      bt = #{record.bt,jdbcType=VARCHAR},
+      fl = #{record.fl,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      sj = #{record.sj,jdbcType=VARCHAR},
+      js = #{record.js,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Zy" >
+    update zy
+    <set >
+      <if test="bt != null" >
+        bt = #{bt,jdbcType=VARCHAR},
+      </if>
+      <if test="fl != null" >
+        fl = #{fl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sj != null" >
+        sj = #{sj,jdbcType=VARCHAR},
+      </if>
+      <if test="js != null" >
+        js = #{js,jdbcType=VARCHAR},
+      </if>
+      <if test="nr != null" >
+        nr = #{nr,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pojo.Zy" >
+    update zy
+    set bt = #{bt,jdbcType=VARCHAR},
+      fl = #{fl,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      sj = #{sj,jdbcType=VARCHAR},
+      js = #{js,jdbcType=VARCHAR},
+      nr = #{nr,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Zy" >
+    update zy
+    set bt = #{bt,jdbcType=VARCHAR},
+      fl = #{fl,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      sj = #{sj,jdbcType=VARCHAR},
+      js = #{js,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

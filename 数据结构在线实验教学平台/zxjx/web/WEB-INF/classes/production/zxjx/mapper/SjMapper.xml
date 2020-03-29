@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.SjMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Sj" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="zyid" property="zyid" jdbcType="VARCHAR" />
+    <result column="mc" property="mc" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="member" property="member" jdbcType="VARCHAR" />
+    <result column="js" property="js" jdbcType="VARCHAR" />
+    <result column="pf" property="pf" jdbcType="VARCHAR" />
+    <result column="py" property="py" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, zyid, mc, url, member, js, pf, py
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pojo.SjExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sj
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sj
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sj
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.SjExample" >
+    delete from sj
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Sj" >
+    insert into sj (id, zyid, mc, 
+      url, member, js, pf, 
+      py)
+    values (#{id,jdbcType=INTEGER}, #{zyid,jdbcType=VARCHAR}, #{mc,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{member,jdbcType=VARCHAR}, #{js,jdbcType=VARCHAR}, #{pf,jdbcType=VARCHAR}, 
+      #{py,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Sj" >
+    insert into sj
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="zyid != null" >
+        zyid,
+      </if>
+      <if test="mc != null" >
+        mc,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="member != null" >
+        member,
+      </if>
+      <if test="js != null" >
+        js,
+      </if>
+      <if test="pf != null" >
+        pf,
+      </if>
+      <if test="py != null" >
+        py,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="zyid != null" >
+        #{zyid,jdbcType=VARCHAR},
+      </if>
+      <if test="mc != null" >
+        #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null" >
+        #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="js != null" >
+        #{js,jdbcType=VARCHAR},
+      </if>
+      <if test="pf != null" >
+        #{pf,jdbcType=VARCHAR},
+      </if>
+      <if test="py != null" >
+        #{py,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.SjExample" resultType="java.lang.Integer" >
+    select count(*) from sj
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sj
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.zyid != null" >
+        zyid = #{record.zyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mc != null" >
+        mc = #{record.mc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.member != null" >
+        member = #{record.member,jdbcType=VARCHAR},
+      </if>
+      <if test="record.js != null" >
+        js = #{record.js,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pf != null" >
+        pf = #{record.pf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.py != null" >
+        py = #{record.py,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sj
+    set id = #{record.id,jdbcType=INTEGER},
+      zyid = #{record.zyid,jdbcType=VARCHAR},
+      mc = #{record.mc,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      member = #{record.member,jdbcType=VARCHAR},
+      js = #{record.js,jdbcType=VARCHAR},
+      pf = #{record.pf,jdbcType=VARCHAR},
+      py = #{record.py,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Sj" >
+    update sj
+    <set >
+      <if test="zyid != null" >
+        zyid = #{zyid,jdbcType=VARCHAR},
+      </if>
+      <if test="mc != null" >
+        mc = #{mc,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null" >
+        member = #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="js != null" >
+        js = #{js,jdbcType=VARCHAR},
+      </if>
+      <if test="pf != null" >
+        pf = #{pf,jdbcType=VARCHAR},
+      </if>
+      <if test="py != null" >
+        py = #{py,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Sj" >
+    update sj
+    set zyid = #{zyid,jdbcType=VARCHAR},
+      mc = #{mc,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      member = #{member,jdbcType=VARCHAR},
+      js = #{js,jdbcType=VARCHAR},
+      pf = #{pf,jdbcType=VARCHAR},
+      py = #{py,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

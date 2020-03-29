@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="zxjx:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/zxjx_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="zxjx/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="zxjx" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
